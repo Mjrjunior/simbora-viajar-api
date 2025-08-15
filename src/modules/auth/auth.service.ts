@@ -3,7 +3,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { UsersService } from 'src/modules/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import ApiError from '../api-error/api-error';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,11 @@ export class AuthService {
       !user ||
       !bcrypt.compareSync(createAuthDto.password, user.password)
     ) {
-      throw new Error('Invalid email or password');
+      throw new ApiError(
+        'Invalid email or password',
+        'Email ou senha inválidos',
+        401
+      );
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

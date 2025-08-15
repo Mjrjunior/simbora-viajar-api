@@ -54,9 +54,9 @@ model Trip {
   id          String    @id @default(cuid())
   title       String
   destination String
-  startDate   DateTime
-  endDate     DateTime
-  description String
+  startDate   DateTime?
+  endDate     DateTime?
+  description String?
   createdBy   String    @map("created_by")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
